@@ -1,0 +1,87 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Segoe UI Variable Text', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'Cascadia Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+
+  --color-navy-50: #eef3fa;
+  --color-navy-100: #d6e1f0;
+  --color-navy-200: #aec3e0;
+  --color-navy-300: #7f9cc7;
+  --color-navy-400: #4f74aa;
+  --color-navy-500: #2f5690;
+  --color-navy-600: #214274;
+  --color-navy-700: #18335c;
+  --color-navy-800: #112546;
+  --color-navy-900: #0b1b33;
+  --color-navy-950: #061022;
+
+  --color-accent: #ea6a1f;
+  --color-accent-soft: #fdeee4;
+
+  --color-background: #f4f6f9;
+  --color-foreground: #0f172a;
+  --color-card: #ffffff;
+  --color-border: #e2e8f0;
+  --color-muted: #f1f5f9;
+  --color-muted-foreground: #64748b;
+  --color-primary: #0b1b33;
+  --color-primary-foreground: #ffffff;
+  --color-ring: #2f5690;
+  --color-destructive: #c62828;
+
+  /* Status (reserved; always paired with icon + label) */
+  --color-ok: #0f8a3c;
+  --color-ok-soft: #e7f6ec;
+  --color-warn: #b76e00;
+  --color-warn-soft: #fff4dc;
+  --color-fail: #c62828;
+  --color-fail-soft: #fdecec;
+
+  --radius-lg: 0.625rem;
+  --shadow-card: 0 1px 2px rgb(15 23 42 / 0.05), 0 1px 1px rgb(15 23 42 / 0.03);
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: 'tnum' 1;
+  }
+  *:focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: #d6e1f0;
+  }
+}
+
+@keyframes typing {
+  0%, 60%, 100% { opacity: 0.25; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-2px); }
+}
+.typing-dot { animation: typing 1.2s infinite; }
+.typing-dot:nth-child(2) { animation-delay: 0.15s; }
+.typing-dot:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes progress-stripes { from { background-position: 1rem 0; } to { background-position: 0 0; } }
+.progress-indeterminate {
+  background-image: linear-gradient(45deg, rgb(255 255 255 / 0.25) 25%, transparent 25%, transparent 50%, rgb(255 255 255 / 0.25) 50%, rgb(255 255 255 / 0.25) 75%, transparent 75%, transparent);
+  background-size: 1rem 1rem;
+  animation: progress-stripes 0.8s linear infinite;
+}
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: #fff; }
+  .print-full { margin: 0 !important; padding: 0 !important; max-width: none !important; }
+  .print-break { break-inside: avoid; }
+}
