@@ -10,8 +10,8 @@ import { loginSchema, type LoginValues } from '@/schemas';
 import { errorMessage } from '@/services/apiError';
 
 const DEMO = [
-  { role: 'Engineer Demo', email: 'engineer.demo@meridian-energy.example', name: 'Priya Raman', title: 'Senior Mechanical Engineer', icon: HardHat, blurb: 'Upload workbooks, run guided validation, complete manual testing and submit for approval.' },
-  { role: 'Manager Demo', email: 'manager.demo@meridian-energy.example', name: 'Elena Vasquez', title: 'Engineering Manager — Technical Assurance', icon: UserCog, blurb: 'Review submissions, approve or request changes and authorise vendor handover.' },
+  { role: 'Discipline Engineer', email: 'discipline.engineer@meridian-energy.example', name: 'Priya Raman', title: 'Mechanical', icon: HardHat, blurb: 'Upload workbooks, run guided validation, complete manual testing and submit for approval.' },
+  { role: 'Responsible Engineer', email: 'responsible.engineer@meridian-energy.example', name: 'Elena Vasquez', title: 'Technical Assurance', icon: UserCog, blurb: 'Review submissions, approve or request changes and authorise vendor handover.' },
 ];
 
 function safeRedirect(target: string | null) {
@@ -59,7 +59,7 @@ export default function LoginPage() {
           <h1 className="text-3xl font-semibold leading-tight">Validated engineering data, before it reaches your vendors.</h1>
           <p className="mt-4 text-sm leading-relaxed text-navy-200">
             Check equipment data sheets, pipeline inspection data and instrument indices against controlled requirement specifications, then route them through manual verification and
-            manager approval with a complete audit trail.
+            Responsible Engineer approval with a complete audit trail.
           </p>
           <ul className="mt-8 space-y-3 text-sm text-navy-100">
             {[
@@ -121,7 +121,7 @@ export default function LoginPage() {
           <form onSubmit={form.handleSubmit(submit)} noValidate className="space-y-4">
             <div>
               <Label htmlFor="email">Work email</Label>
-              <Input id="email" type="email" autoComplete="username" placeholder="engineer.demo@meridian-energy.example" aria-invalid={!!form.formState.errors.email} {...form.register('email')} />
+              <Input id="email" type="email" autoComplete="username" placeholder="discipline.engineer@meridian-energy.example" aria-invalid={!!form.formState.errors.email} {...form.register('email')} />
               <FieldError message={form.formState.errors.email?.message} />
             </div>
             <div>

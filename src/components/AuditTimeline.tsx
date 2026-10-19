@@ -1,7 +1,7 @@
 import type { LucideIcon } from 'lucide-react';
 import { CircleCheck, CircleX, ClipboardCheck, FilePlus2, FileUp, Lock, PackageCheck, PlayCircle, Send, ShieldCheck, Undo2 } from 'lucide-react';
 import { Link } from 'react-router';
-import { AUDIT_LABEL } from '@/lib/labels';
+import { AUDIT_LABEL, ROLE_LABEL } from '@/lib/labels';
 import { cn, formatDate, relativeTime } from '@/lib/utils';
 import type { AuditAction, AuditEvent } from '@/types';
 import { EmptyState } from './common';
@@ -57,7 +57,7 @@ export function AuditTimeline({ events, showDocument, compact, emptyText = 'No a
               </div>
               {!compact && <p className="mt-0.5 break-words text-xs text-slate-500">{e.detail}</p>}
               <p className="mt-0.5 text-[11px] text-slate-400">
-                {e.actorName} · {e.actorRole === 'manager' ? 'Manager' : 'Engineer'}
+                {e.actorName} · {ROLE_LABEL[e.actorRole]}
                 {e.versionNo ? ` · v${e.versionNo}` : ''}
                 {e.outcome === 'denied' && <span className="ml-1 font-medium text-fail">· denied</span>}
               </p>

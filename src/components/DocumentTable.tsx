@@ -59,7 +59,7 @@ export function DocumentTable({
           <SortTh k="projectCode" className={cn('hidden md:table-cell', compact && 'md:hidden 2xl:table-cell')}>
             Project
           </SortTh>
-          {showOwner && <Th className="hidden lg:table-cell">Engineer</Th>}
+          {showOwner && <Th className="hidden lg:table-cell">Discipline engineer</Th>}
           <SortTh k="updatedAt" className={cn('hidden sm:table-cell', compact && 'sm:hidden')}>
             Updated
           </SortTh>
@@ -181,8 +181,8 @@ export function DocumentBrowser({ fixed = {}, showOwner, hideFilters = [], linkF
             </Select>
           )}
           {showOwner && !hideFilters.includes('engineer') && (
-            <Select aria-label="Engineer" className="w-auto min-w-36" value={filters.ownerId ?? ''} onChange={(e) => set('engineer', e.target.value || undefined)}>
-              <option value="">All engineers</option>
+            <Select aria-label="Discipline engineer" className="w-auto min-w-36" value={filters.ownerId ?? ''} onChange={(e) => set('engineer', e.target.value || undefined)}>
+              <option value="">All discipline engineers</option>
               {engineers.map((u) => (
                 <option key={u.id} value={u.id}>
                   {u.name}

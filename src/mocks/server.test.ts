@@ -16,8 +16,8 @@ beforeAll(() => {
 const { handleMockRequest: req, setMockLatency } = await import('./server');
 setMockLatency(0);
 
-const ENGINEER = 'engineer.demo@meridian-energy.example';
-const MANAGER = 'manager.demo@meridian-energy.example';
+const ENGINEER = 'discipline.engineer@meridian-energy.example';
+const MANAGER = 'responsible.engineer@meridian-energy.example';
 const login = (email: string) => req('POST', '/auth/login', {}, { email, password: 'any' });
 
 async function expectStatus(p: Promise<unknown>, status: number) {

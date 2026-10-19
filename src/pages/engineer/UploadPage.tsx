@@ -247,7 +247,7 @@ function UploadWizard({ existing }: { existing?: EngDocument }) {
               )}
               <div className="md:col-span-2">
                 <Label htmlFor="changeNote">{isVersion ? 'What changed in this revision?' : 'Change note (optional)'}</Label>
-                <Textarea id="changeNote" rows={2} placeholder={isVersion ? 'e.g. Corrected nozzle N2 flange rating per manager review comment' : 'Initial issue'} aria-invalid={!!form.formState.errors.changeNote} {...form.register('changeNote')} />
+                <Textarea id="changeNote" rows={2} placeholder={isVersion ? 'e.g. Corrected nozzle N2 flange rating per Responsible Engineer review comment' : 'Initial issue'} aria-invalid={!!form.formState.errors.changeNote} {...form.register('changeNote')} />
                 <FieldError message={form.formState.errors.changeNote?.message} />
               </div>
               <div className="flex justify-end md:col-span-2">

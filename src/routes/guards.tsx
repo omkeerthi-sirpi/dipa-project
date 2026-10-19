@@ -40,7 +40,7 @@ export function Forbidden({ role }: { role?: Role }) {
       <EmptyState
         icon={Lock}
         title="403 — Not available for your role"
-        description={role ? `This area is restricted to ${role === 'manager' ? 'managers' : 'engineers'}. Role checks are also enforced by the API.` : 'You do not have access to this page.'}
+        description={role ? `This area is restricted to ${role === 'manager' ? 'Responsible Engineers' : 'Discipline Engineers'}. Role checks are also enforced by the API.` : 'You do not have access to this page.'}
         action={
           <Button asChild variant="outline" size="sm">
             <Link to="/dashboard">Go to dashboard</Link>

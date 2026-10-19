@@ -132,7 +132,7 @@ function Review({ doc, report }: { doc: EngDocument; report: ValidationReport | 
             <div className="space-y-6">
               <Card>
                 <CardHeader>
-                  <CardTitle>Engineer comments</CardTitle>
+                  <CardTitle>Discipline engineer comments</CardTitle>
                 </CardHeader>
                 <CardContent>
                   {submission?.comment ? <p className="text-sm text-slate-700">“{submission.comment}”</p> : <p className="text-sm text-slate-400">No comments provided.</p>}

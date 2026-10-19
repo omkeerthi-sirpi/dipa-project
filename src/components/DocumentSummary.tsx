@@ -41,7 +41,7 @@ export function DocumentSummaryCard({ doc, title = 'Document details' }: { doc: 
             { label: 'Asset', value: asset ? `${asset.tag} · ${asset.name}` : '—' },
             { label: 'Document type', value: DOC_TYPE_LABEL[doc.type] },
             { label: 'Requirement', value: requirement ? `${requirement.code} ${requirement.version} — ${requirement.title}` : '—' },
-            { label: 'Engineer', value: owner ? `${owner.name} · ${owner.title}` : '—' },
+            { label: 'Discipline Engineer', value: owner ? `${owner.name} · ${owner.title}` : '—' },
             { label: 'Workbook', value: version ? `${version.file.fileName} · ${formatBytes(version.file.fileSize)}${version.file.synthetic ? ' · synthetic' : ''}` : '—' },
           ]}
         />

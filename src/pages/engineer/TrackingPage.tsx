@@ -14,7 +14,7 @@ export function TrackingPage() {
   const count = (s: WorkflowStage) => all.data?.items.filter((d) => d.stage === s).length ?? 0;
   return (
     <>
-      <PageHeader title="Approval tracking" description="Follow your submissions through manager review and vendor handover." crumbs={[{ label: 'Dashboard', to: '/dashboard' }, { label: 'Approval Tracking' }]} />
+      <PageHeader title="Approval tracking" description="Follow your submissions through Responsible Engineer review and vendor handover." crumbs={[{ label: 'Dashboard', to: '/dashboard' }, { label: 'Approval Tracking' }]} />
       <div className="mb-6 grid grid-cols-2 gap-4 lg:grid-cols-5">
         <StatCard label="Ready to submit" value={count('ready_for_review')} icon={UserCheck} tone="accent" loading={all.isLoading} to="/tracking?stage=ready_for_review" />
         <StatCard label="Awaiting decision" value={count('pending_approval')} icon={Hourglass} tone="accent" loading={all.isLoading} to="/tracking?stage=pending_approval" />

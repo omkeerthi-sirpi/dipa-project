@@ -34,7 +34,6 @@ function ActivityCard() {
     <Card>
       <CardHeader>
         <CardTitle>Recent activity</CardTitle>
-        <ViewAll to="/audit" label="Audit history" />
       </CardHeader>
       <CardContent>{audit.isLoading ? <LoadingBlock rows={4} className="p-0" /> : <AuditTimeline events={keyEvents(audit.data)} showDocument compact />}</CardContent>
     </Card>
@@ -164,7 +163,7 @@ function ManagerDashboard() {
           <StatCard label="Awaiting approval" value={s?.awaitingApproval ?? 0} icon={Hourglass} tone="accent" loading={!s} to="/approvals" />
           <StatCard label="Approved" value={s?.approved ?? 0} icon={ShieldCheck} tone="ok" loading={!s} to="/approved" />
           <StatCard label="Changes requested" value={s?.rejected ?? 0} icon={Undo2} tone="warn" loading={!s} to="/documents?group=rejected" />
-          <StatCard label="With engineers" value={s?.pendingEngineer ?? 0} icon={Wrench} tone="slate" loading={!s} to="/documents?group=pending_engineer" />
+          <StatCard label="With discipline engineers" value={s?.pendingEngineer ?? 0} icon={Wrench} tone="slate" loading={!s} to="/documents?group=pending_engineer" />
           <StatCard label="Ready for vendor" value={s?.vendorReady ?? 0} icon={PackageCheck} tone="navy" loading={!s} to="/vendor?tab=ready" />
         </div>
       )}
@@ -190,7 +189,6 @@ function ManagerDashboard() {
           <Card>
             <CardHeader>
               <CardTitle>Approval turnaround</CardTitle>
-              <ViewAll to="/analytics" label="Analytics" />
             </CardHeader>
             <CardContent>
               {s ? (
@@ -213,7 +211,7 @@ function ManagerDashboard() {
           </Card>
           <Card>
             <CardHeader>
-              <CardTitle>Engineer workload</CardTitle>
+              <CardTitle>Discipline engineer workload</CardTitle>
             </CardHeader>
             {s ? (
               <ul className="divide-y divide-slate-100">

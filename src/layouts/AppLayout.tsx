@@ -2,12 +2,10 @@ import type { LucideIcon } from 'lucide-react';
 import {
   Bell,
   Bot,
-  ChartColumn,
   CheckCheck,
   ClipboardCheck,
   FileCheck2,
   FileSpreadsheet,
-  FileText,
   FolderKanban,
   Hourglass,
   Inbox,
@@ -19,7 +17,6 @@ import {
   Search,
   Send,
   ShieldCheck,
-  History,
   Upload,
   UserRound,
   X,
@@ -30,6 +27,7 @@ import { toast } from 'sonner';
 import { PageLoading } from '@/components/common';
 import { Menu, MenuContent, MenuItem, MenuLabel, MenuSeparator, MenuTrigger } from '@/components/ui/menu';
 import { useLogout, useMarkNotificationsRead, useNotifications, useResetDemo, useSession, useSwitchUser } from '@/hooks/queries';
+import { ROLE_LABEL } from '@/lib/labels';
 import { cn, relativeTime } from '@/lib/utils';
 import type { Role } from '@/types';
 
@@ -53,12 +51,10 @@ export const NAV: Record<Role, { section?: string; items: NavItem[] }[]> = {
       section: 'Assurance',
       items: [
         { to: '/validate', label: 'Validation Chatbot', icon: Bot },
-        { to: '/reports', label: 'Validation Reports', icon: FileText },
         { to: '/manual-testing', label: 'Manual Testing', icon: ClipboardCheck },
         { to: '/tracking', label: 'Approval Tracking', icon: Hourglass },
       ],
     },
-    { section: 'Records', items: [{ to: '/audit', label: 'Audit History', icon: History }] },
   ],
   manager: [
     {
@@ -74,13 +70,6 @@ export const NAV: Record<Role, { section?: string; items: NavItem[] }[]> = {
       items: [
         { to: '/approved', label: 'Approved Documents', icon: ShieldCheck },
         { to: '/vendor', label: 'Vendor Submissions', icon: Send },
-      ],
-    },
-    {
-      section: 'Insight',
-      items: [
-        { to: '/analytics', label: 'Reports & Analytics', icon: ChartColumn },
-        { to: '/audit', label: 'Audit History', icon: History },
       ],
     },
   ],
@@ -198,7 +187,7 @@ function ProfileMenu() {
   const navigate = useNavigate();
   if (!session) return null;
   const u = session.user;
-  const switchTo = u.role === 'engineer' ? { email: 'manager.demo@meridian-energy.example', label: 'Manager Demo' } : { email: 'engineer.demo@meridian-energy.example', label: 'Engineer Demo' };
+  const switchTo = u.role === 'engineer' ? { email: 'responsible.engineer@meridian-energy.example', label: 'Responsible Engineer' } : { email: 'discipline.engineer@meridian-energy.example', label: 'Discipline Engineer' };
   return (
     <Menu>
       <MenuTrigger asChild>
@@ -206,7 +195,7 @@ function ProfileMenu() {
           <span className="grid size-8 place-items-center rounded-full bg-navy-800 text-xs font-semibold text-white">{u.initials}</span>
           <span className="hidden text-left leading-tight md:block">
             <span className="block text-sm font-medium text-slate-800">{u.name}</span>
-            <span className="block text-[11px] text-slate-500">{u.role === 'engineer' ? 'Engineer' : 'Manager'}</span>
+            <span className="block text-[11px] text-slate-500">{ROLE_LABEL[u.role]}</span>
           </span>
         </button>
       </MenuTrigger>

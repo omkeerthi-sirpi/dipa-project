@@ -19,7 +19,7 @@ export interface DbState {
 }
 
 const KEY = 'dipa.mockdb.v1';
-const SCHEMA = 1;
+const SCHEMA = 2;
 
 let state: DbState | null = null;
 let seeder: (() => DbState) | null = null;

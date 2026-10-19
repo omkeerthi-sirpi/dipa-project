@@ -86,16 +86,16 @@ export function manualTestBlockers(doc: EngDocument, report: ValidationReport | 
 }
 
 /**
- * Gate for "Submit for manager approval". Blocks when required manual tests are
+ * Gate for "Submit to Responsible Engineer". Blocks when required manual tests are
  * incomplete/failed, validation is partial or stale, or critical failures remain.
  * Unresolved MAJOR failures are allowed only via an explicit, justified deviation
- * request which the manager sees highlighted (authorised exception workflow).
+ * request which the Responsible Engineer sees highlighted (authorised exception workflow).
  */
 export function submissionBlockers(doc: EngDocument, report: ValidationReport | null, session: ManualTestSession | undefined): string[] {
   const reasons: string[] = [];
   const testingIncomplete = !session || session.versionNo !== doc.currentVersion || session.status !== 'completed';
   // Avoid a duplicate message: incomplete manual testing is reported below.
-  if (doc.stage !== 'ready_for_review' && !testingIncomplete) reasons.push('Document must be in “Ready for Manager Review”.');
+  if (doc.stage !== 'ready_for_review' && !testingIncomplete) reasons.push('Document must be in “Ready for Review”.');
   if (!report || report.versionNo !== doc.currentVersion) reasons.push('No automated validation report exists for the current version.');
   else {
     if (report.scope !== 'full') reasons.push('Latest validation covered only selected worksheets. Re-run validation on all worksheets.');

@@ -10,9 +10,7 @@ const page = <T extends Record<string, unknown>>(loader: () => Promise<T>, name:
 const DashboardPage = page(() => import('@/pages/DashboardPage'), 'DashboardPage');
 const DocumentsPage = page(() => import('@/pages/DocumentsPage'), 'DocumentsPage');
 const DocumentDetailPage = page(() => import('@/pages/DocumentDetailPage'), 'DocumentDetailPage');
-const ReportsPage = page(() => import('@/pages/ReportsPage'), 'ReportsPage');
 const ReportPage = page(() => import('@/pages/ReportPage'), 'ReportPage');
-const AuditPage = page(() => import('@/pages/AuditPage'), 'AuditPage');
 const ProfilePage = page(() => import('@/pages/ProfilePage'), 'ProfilePage');
 const NotificationsPage = page(() => import('@/pages/NotificationsPage'), 'NotificationsPage');
 const NotFoundPage = page(() => import('@/pages/NotFoundPage'), 'NotFoundPage');
@@ -29,7 +27,6 @@ const ProjectsPage = page(() => import('@/pages/manager/ProjectsPage'), 'Project
 const ApprovedPage = page(() => import('@/pages/manager/ApprovedPage'), 'ApprovedPage');
 const VendorListPage = page(() => import('@/pages/manager/VendorListPage'), 'VendorListPage');
 const VendorHandoverPage = page(() => import('@/pages/manager/VendorHandoverPage'), 'VendorHandoverPage');
-const AnalyticsPage = page(() => import('@/pages/manager/AnalyticsPage'), 'AnalyticsPage');
 
 export const router = createBrowserRouter([
   { path: '/login', element: <LoginPage /> },
@@ -43,9 +40,7 @@ export const router = createBrowserRouter([
           { path: 'dashboard', element: <DashboardPage /> },
           { path: 'documents', element: <DocumentsPage /> },
           { path: 'documents/:id', element: <DocumentDetailPage /> },
-          { path: 'reports', element: <ReportsPage /> },
           { path: 'reports/:reportId', element: <ReportPage /> },
-          { path: 'audit', element: <AuditPage /> },
           { path: 'profile', element: <ProfilePage /> },
           { path: 'notifications', element: <NotificationsPage /> },
           {
@@ -68,7 +63,6 @@ export const router = createBrowserRouter([
               { path: 'approved', element: <ApprovedPage /> },
               { path: 'vendor', element: <VendorListPage /> },
               { path: 'vendor/:id', element: <VendorHandoverPage /> },
-              { path: 'analytics', element: <AnalyticsPage /> },
             ],
           },
           { path: '*', element: <NotFoundPage /> },

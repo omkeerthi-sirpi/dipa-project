@@ -305,7 +305,7 @@ export function submitForApproval(s: DbState, actor: User, docId: string, input:
   const deviationRequested = !!report && report.totals.failedChecks > 0;
   doc.submissions.push({ versionNo: version.versionNo, revision: version.revision, submittedAt: now.toISOString(), submittedBy: actor.id, comment: input.comment.trim().slice(0, 2000), deviationRequested });
   doc.updatedAt = now.toISOString();
-  audit(s, actor, 'submitted_for_approval', `Submitted ${version.revision} for manager approval${deviationRequested ? ' with deviation request' : ''}`, now, doc);
+  audit(s, actor, 'submitted_for_approval', `Submitted ${version.revision} for Responsible Engineer approval${deviationRequested ? ' with deviation request' : ''}`, now, doc);
   for (const m of users.filter((u) => u.role === 'manager' && u.projectIds.includes(doc.projectId))) {
     notify(s, m.id, 'Document awaiting approval', `${actor.name} submitted ${doc.docNumber} ${version.revision}`, doc, `/review/${doc.id}`, now);
   }
@@ -363,7 +363,7 @@ export function vendorSubmit(s: DbState, actor: User, docId: string, input: Vend
   if (doc.stage !== 'vendor_ready') throw new ApiError(409, 'CONFLICT', 'Document is not ready for vendor submission.');
   if (input.versionNo !== doc.currentVersion) throw new ApiError(409, 'CONFLICT', 'Version mismatch — reload the handover page.');
   const approval = [...doc.approvals].reverse().find((a) => a.versionNo === doc.currentVersion);
-  if (approval?.decision !== 'approved') throw new ApiError(409, 'CONFLICT', 'Explicit manager approval of this version is required before vendor submission.');
+  if (approval?.decision !== 'approved') throw new ApiError(409, 'CONFLICT', 'Explicit Responsible Engineer approval of this version is required before vendor submission.');
   const vendor = vendors.find((v) => v.id === input.vendorId);
   if (!vendor) throw new ApiError(422, 'VALIDATION', 'Unknown vendor.');
   const version = currentVersion(doc);

@@ -9,11 +9,11 @@ export const STAGE_GROUPS: Record<StageGroup, { label: string; match: (d: Doc) =
   failed: { label: 'Failed Validation', match: (d) => d.stage === 'validation_failed' },
   pending_manual: { label: 'Pending Manual Testing', match: (d) => d.stage === 'validation_passed' || d.stage === 'manual_testing' },
   submitted: { label: 'Submitted for Approval', match: (d) => d.approvalStatus === 'pending' || d.approvalStatus === 'approved' },
-  awaiting_approval: { label: 'Awaiting Manager Approval', match: (d) => d.stage === 'pending_approval' },
+  awaiting_approval: { label: 'Awaiting Approval', match: (d) => d.stage === 'pending_approval' },
   approved: { label: 'Approved', match: (d) => d.approvalStatus === 'approved' },
   rejected: { label: 'Changes Requested', match: (d) => d.stage === 'changes_requested' },
   pending_engineer: {
-    label: 'Pending Engineer Action',
+    label: 'Pending Discipline Engineer Action',
     match: (d) => (['uploaded', 'validation_failed', 'validation_passed', 'manual_testing', 'ready_for_review', 'changes_requested'] as WorkflowStage[]).includes(d.stage),
   },
   vendor_ready: { label: 'Ready for Vendor Submission', match: (d) => d.stage === 'vendor_ready' },

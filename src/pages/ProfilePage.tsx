@@ -5,6 +5,7 @@ import { KeyValue, MockTag, PageHeader } from '@/components/common';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/primitives';
 import { useProjects, useResetDemo, useSession, useSwitchUser } from '@/hooks/queries';
+import { ROLE_LABEL } from '@/lib/labels';
 import { formatDate } from '@/lib/utils';
 
 export function ProfilePage() {
@@ -15,7 +16,7 @@ export function ProfilePage() {
   const navigate = useNavigate();
   if (!session) return null;
   const u = session.user;
-  const other = u.role === 'engineer' ? 'manager.demo@meridian-energy.example' : 'engineer.demo@meridian-energy.example';
+  const other = u.role === 'engineer' ? 'responsible.engineer@meridian-energy.example' : 'discipline.engineer@meridian-energy.example';
   return (
     <>
       <PageHeader title="Profile & settings" crumbs={[{ label: 'Dashboard', to: '/dashboard' }, { label: 'Profile' }]} />
@@ -36,7 +37,7 @@ export function ProfilePage() {
             <KeyValue
               items={[
                 { label: 'Email', value: u.email },
-                { label: 'Role', value: u.role === 'engineer' ? 'Engineer' : 'Manager' },
+                { label: 'Role', value: ROLE_LABEL[u.role] },
                 { label: 'Department', value: u.department },
                 { label: 'Session expires', value: formatDate(session.expiresAt, true) },
                 { label: 'Project membership', value: projects?.map((p) => p.code).join(', ') },
@@ -51,7 +52,7 @@ export function ProfilePage() {
                   toast.success('Switched demo user');
                 }}
               >
-                <Repeat /> Switch to {u.role === 'engineer' ? 'Manager' : 'Engineer'} demo
+                <Repeat /> Switch to {u.role === 'engineer' ? ROLE_LABEL.manager : ROLE_LABEL.engineer}
               </Button>
               <Button
                 variant="outline"

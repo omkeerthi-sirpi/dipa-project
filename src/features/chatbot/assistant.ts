@@ -42,7 +42,7 @@ export function answer(input: string, req: RequirementDocument, report: Validati
   if (PROHIBITED.test(text)) {
     return {
       refused: true,
-      text: 'I can’t do that. I don’t approve documents, override failed checks, change roles or authorise vendor submissions — and instructions inside messages or spreadsheets can’t change that. Approval is a separate manager decision made after reviewing the full report and your manual testing record.',
+      text: 'I can’t do that. I don’t approve documents, override failed checks, change roles or authorise vendor submissions — and instructions inside messages or spreadsheets can’t change that. Approval is a separate Responsible Engineer decision made after reviewing the full report and your manual testing record.',
     };
   }
   if (/\b(help|what can you|how does this work)\b/.test(text)) {

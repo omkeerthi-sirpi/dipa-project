@@ -37,7 +37,7 @@ export function ReportPage() {
           </>
         }
         crumbs={[
-          { label: session?.user.role === 'manager' ? 'All Documents' : 'Validation Reports', to: session?.user.role === 'manager' ? '/documents' : '/reports' },
+          { label: session?.user.role === 'manager' ? 'All Documents' : 'My Documents', to: '/documents' },
           { label: d.docNumber, to: `/documents/${d.id}` },
           { label: `Report ${r.id}` },
         ]}

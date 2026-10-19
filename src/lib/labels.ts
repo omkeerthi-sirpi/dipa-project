@@ -1,4 +1,6 @@
-import type { ApprovalStatus, AuditAction, DocumentType, ManualTestStatus, Severity, ValidationCategory, ValidationStatus, VendorStatus, WorkflowStage } from '@/types';
+import type { Role, ApprovalStatus, AuditAction, DocumentType, ManualTestStatus, Severity, ValidationCategory, ValidationStatus, VendorStatus, WorkflowStage } from '@/types';
+
+export const ROLE_LABEL: Record<Role, string> = { engineer: 'Discipline Engineer', manager: 'Responsible Engineer' };
 
 export const DOC_TYPE_LABEL: Record<DocumentType, string> = {
   equipment_data_sheet: 'Equipment Data Sheet',
@@ -15,10 +17,10 @@ export const STAGE_LABEL: Record<WorkflowStage, string> = {
   validation_failed: 'Validation Failed',
   validation_passed: 'Validation Passed',
   manual_testing: 'Manual Testing In Progress',
-  ready_for_review: 'Ready for Manager Review',
-  pending_approval: 'Pending Manager Approval',
+  ready_for_review: 'Ready for Review',
+  pending_approval: 'Pending Approval',
   changes_requested: 'Changes Requested',
-  approved: 'Manager Approved',
+  approved: 'Approved',
   vendor_ready: 'Vendor Submission Ready',
   vendor_submitted: 'Vendor Submitted',
 };

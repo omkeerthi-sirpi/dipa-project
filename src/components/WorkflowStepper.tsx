@@ -6,7 +6,7 @@ const STEPS: { key: string; label: string; stages: WorkflowStage[] }[] = [
   { key: 'upload', label: 'Uploaded', stages: ['draft', 'uploaded'] },
   { key: 'validate', label: 'Automated validation', stages: ['validation_in_progress', 'validation_failed', 'validation_passed'] },
   { key: 'manual', label: 'Manual testing', stages: ['manual_testing', 'ready_for_review'] },
-  { key: 'approval', label: 'Manager approval', stages: ['pending_approval', 'changes_requested', 'approved'] },
+  { key: 'approval', label: 'Responsible Engineer approval', stages: ['pending_approval', 'changes_requested', 'approved'] },
   { key: 'vendor', label: 'Vendor handover', stages: ['vendor_ready', 'vendor_submitted'] },
 ];
 

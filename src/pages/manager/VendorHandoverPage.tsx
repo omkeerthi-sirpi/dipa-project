@@ -47,7 +47,7 @@ function Handover({ doc, report }: { doc: EngDocument; report: ValidationReport 
         <PageHeader title="Vendor handover" crumbs={crumbs} />
         <Card className="p-6 text-sm text-slate-600">
           <p className="flex items-center gap-2">
-            <Lock className="size-4 text-slate-400" /> Vendor submission requires explicit manager approval. This document is currently <StageBadge stage={doc.stage} />.
+            <Lock className="size-4 text-slate-400" /> Vendor submission requires explicit Responsible Engineer approval. This document is currently <StageBadge stage={doc.stage} />.
           </p>
         </Card>
       </>
@@ -110,7 +110,7 @@ function Handover({ doc, report }: { doc: EngDocument; report: ValidationReport 
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <ShieldCheck className="size-4 text-ok" /> Manager approval
+                <ShieldCheck className="size-4 text-ok" /> Responsible Engineer approval
               </CardTitle>
             </CardHeader>
             <CardContent>

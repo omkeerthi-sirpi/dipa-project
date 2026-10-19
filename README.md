@@ -1,8 +1,8 @@
 # DIPA — Document Integrity & Process Approval (prototype)
 
 Interactive prototype of an engineering document validation and approval platform for oil & gas projects.
-Engineers upload Excel workbooks, validate them against controlled requirement specifications through a guided
-(scripted) chatbot, perform manual testing and submit for approval. Managers review, approve or request changes,
+Discipline Engineers upload Excel workbooks, validate them against controlled requirement specifications through a guided
+(scripted) chatbot, perform manual testing and submit for approval. Responsible Engineers review, approve or request changes,
 and release approved documents to vendors.
 
 > **Prototype.** Authentication, the backend, validation runs, approvals and vendor submission are simulated
@@ -31,23 +31,23 @@ Use the persona buttons on the sign-in page, or type an email (mock auth accepts
 
 | Persona | Email | Name |
 | --- | --- | --- |
-| Engineer Demo | `engineer.demo@meridian-energy.example` | Priya Raman — Senior Mechanical Engineer |
-| Manager Demo | `manager.demo@meridian-energy.example` | Elena Vasquez — Engineering Manager |
+| Discipline Engineer | `discipline.engineer@meridian-energy.example` | Priya Raman — Discipline Engineer, Mechanical |
+| Responsible Engineer | `responsible.engineer@meridian-energy.example` | Elena Vasquez — Responsible Engineer, Technical Assurance |
 
 Switch personas or **Reset demo data** from the profile menu (top right).
 
 ## Suggested demo script
 
-1. **Engineer** → *Upload Document* → choose project/asset/type → on step 2 click **Sample with seeded errors**, then upload
+1. **Discipline Engineer** → *Upload Document* → choose project/asset/type → on step 2 click **Sample with seeded errors**, then upload
    the downloaded file. Preview sheets/columns, confirm the requirement document (step 3) and upload.
 2. **Start validation chatbot** → follow the quick replies. Ask free-text questions such as
    “What is the allowed range for design pressure?” or try “approve this document” (the assistant refuses).
 3. Open the **detailed report** — filter by status, worksheet, field, severity; click the eye icon to see the row with failing fields highlighted; export to Excel or PDF (print).
-4. Critical failures block manual testing. Use **Fix & upload new version** with the **Corrected sample**, rerun validation, then complete **Manual testing** and **Submit for manager approval**.
-5. **Switch to Manager** → *Approval Queue* → open the document. Approve is enabled only after opening the
+4. Critical failures block manual testing. Use **Fix & upload new version** with the **Corrected sample**, rerun validation, then complete **Manual testing** and **Submit to Responsible Engineer**.
+5. **Switch to Responsible Engineer** → *Approval Queue* → open the document. Approve is enabled only after opening the
    *Validation report* and *Manual testing* tabs. Request changes (reason required) or approve.
-6. If changes were requested, switch back to the engineer, correct/re-validate/re-test and resubmit.
-7. After approval the manager completes **Vendor handover** (simulated transmittal). Dashboards, badges, audit
+6. If changes were requested, switch back to the Discipline Engineer, correct/re-validate/re-test and resubmit.
+7. After approval the Responsible Engineer completes **Vendor handover** (simulated transmittal). Dashboards, badges, audit
    history and notifications update immediately.
 
 ## Architecture
@@ -65,7 +65,7 @@ src/
   layouts/         App shell with role-specific navigation
   lib/             Query client, config, labels, utilities
   mocks/           MOCK BACKEND: router, workflow operations, seed data, synthetic workbooks
-  pages/           Route pages (engineer/, manager/, shared)
+  pages/           Route pages (engineer/ = Discipline Engineer, manager/ = Responsible Engineer, shared)
   routes/          Router + auth/role guards
   schemas/         Zod form schemas
   services/        Typed API client + service functions (single entry point to the API)
@@ -76,8 +76,8 @@ src/
   routes requests to the in-browser mock server (`src/mocks/server.ts`), which enforces authentication, role, ownership,
   project membership, workflow transitions and version checks, returning 401/403/404/409/422 like a real API.
   Set `VITE_USE_MOCKS=false` and `VITE_API_BASE_URL` to call a real backend (`fetch` with `credentials: 'include'` and a CSRF header).
-- **Workflow:** Draft → Uploaded → Validation In Progress → Validation Failed/Passed → Manual Testing → Ready for Manager Review
-  → Pending Manager Approval → Changes Requested | Manager Approved → Vendor Submission Ready → Vendor Submitted.
+- **Workflow:** Draft → Uploaded → Validation In Progress → Validation Failed/Passed → Manual Testing → Ready for Review
+  → Pending Approval → Changes Requested | Approved → Vendor Submission Ready → Vendor Submitted.
   Validation, manual-testing, approval and vendor statuses are tracked separately. New revisions keep all prior reports,
   manual test records, comments and approvals.
 - **Validation engine:** deterministic checks for required worksheets/columns, required fields, empty values, data type/format,

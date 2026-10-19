@@ -156,7 +156,7 @@ function ManualTesting({ doc, report }: { doc: EngDocument; report: ValidationRe
       {
         onSuccess: (d) => {
           form.reset(v);
-          return d.manualTestStatus === 'completed' ? toast.success('Manual testing completed', { description: 'The document is ready for manager review.' }) : toast.warning('Manual testing recorded with failures', { description: 'Resolve the failed tests before submission.' });
+          return d.manualTestStatus === 'completed' ? toast.success('Manual testing completed', { description: 'The document is ready for Responsible Engineer review.' }) : toast.warning('Manual testing recorded with failures', { description: 'Resolve the failed tests before submission.' });
         },
         onError: (e) => toast.error(errorMessage(e), { description: isApiError(e) ? e.details?.slice(0, 3).join(' · ') : undefined }),
       },
@@ -169,7 +169,7 @@ function ManualTesting({ doc, report }: { doc: EngDocument; report: ValidationRe
       {
         onSuccess: () => {
           setSubmitOpen(false);
-          toast.success('Submitted for manager approval', { description: 'Managers on this project have been notified.' });
+          toast.success('Submitted to Responsible Engineer', { description: 'Responsible Engineers on this project have been notified.' });
           navigate('/tracking');
         },
         onError: (e) => toast.error(errorMessage(e), { description: isApiError(e) ? e.details?.join(' · ') : undefined }),
@@ -236,14 +236,14 @@ function ManualTesting({ doc, report }: { doc: EngDocument; report: ValidationRe
                     <TriangleAlert className="size-4" /> Deviation request — authorised exception
                   </CardTitle>
                   <CardDescription>
-                    {report.totals.failedChecks} major finding(s) remain unresolved. Submission requires a justified deviation that the manager must explicitly accept.
+                    {report.totals.failedChecks} major finding(s) remain unresolved. Submission requires a justified deviation that the Responsible Engineer must explicitly accept.
                   </CardDescription>
                 </div>
               </CardHeader>
               <CardContent className="space-y-3">
                 <label className="flex cursor-pointer items-start gap-3 text-sm">
                   <Checkbox className="mt-0.5" {...form.register('deviationAcknowledged')} />
-                  I acknowledge the unresolved major findings and request a deviation for manager review.
+                  I acknowledge the unresolved major findings and request a deviation for Responsible Engineer review.
                 </label>
                 <Textarea rows={3} placeholder="Technical justification (min. 20 characters)…" disabled={!devAck} aria-invalid={!!form.formState.errors.deviationJustification} {...form.register('deviationJustification')} />
                 <div className="flex justify-between text-[11px] text-slate-400">
@@ -318,7 +318,7 @@ function ManualTesting({ doc, report }: { doc: EngDocument; report: ValidationRe
               <ClipboardCheck /> Complete testing
             </Button>
             <Button type="button" variant="accent" disabled={readiness.length > 0 || form.formState.isDirty} onClick={() => setSubmitOpen(true)} title={form.formState.isDirty ? 'Save or complete testing first' : undefined}>
-              <Send /> Submit for manager approval
+              <Send /> Submit to Responsible Engineer
             </Button>
           </div>
         </form>
@@ -331,7 +331,7 @@ function ManualTesting({ doc, report }: { doc: EngDocument; report: ValidationRe
             <CardContent>
               {readiness.length === 0 ? (
                 <p className="flex items-center gap-2 text-sm font-medium text-ok">
-                  <CircleCheck className="size-4" /> Ready to submit for manager approval
+                  <CircleCheck className="size-4" /> Ready to submit to Responsible Engineer
                 </p>
               ) : (
                 <ul className="space-y-2">
@@ -379,9 +379,9 @@ function ManualTesting({ doc, report }: { doc: EngDocument; report: ValidationRe
       <Dialog open={submitOpen} onOpenChange={setSubmitOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Submit for manager approval</DialogTitle>
+            <DialogTitle>Submit to Responsible Engineer</DialogTitle>
             <DialogDescription>
-              {doc.docNumber} {version.revision} will be locked while it awaits a manager decision. You cannot approve your own document.
+              {doc.docNumber} {version.revision} will be locked while it awaits a Responsible Engineer decision. You cannot approve your own document.
             </DialogDescription>
           </DialogHeader>
           <DialogBody className="space-y-3">

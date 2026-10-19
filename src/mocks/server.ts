@@ -297,7 +297,7 @@ route('GET', '/projects', () => {
 route('GET', '/requirements', () => (requireUser(), requirements));
 route('GET', '/vendors', () => {
   const u = requireUser();
-  if (u.role !== 'manager') throw new ApiError(403, 'FORBIDDEN', 'Vendor directory is restricted to managers.');
+  if (u.role !== 'manager') throw new ApiError(403, 'FORBIDDEN', 'Vendor directory is restricted to Responsible Engineers.');
   return vendors;
 });
 route('GET', '/users', () => {
@@ -343,12 +343,12 @@ route('GET', '/reports/:id', ({ params, s }) => {
 // --- stats, audit, notifications ---
 route('GET', '/stats/engineer', ({ s }) => {
   const u = requireUser();
-  if (u.role !== 'engineer') throw new ApiError(403, 'FORBIDDEN', 'Engineer statistics only.');
+  if (u.role !== 'engineer') throw new ApiError(403, 'FORBIDDEN', 'Discipline Engineer statistics only.');
   return engineerStats(s, u);
 });
 route('GET', '/stats/manager', ({ s }) => {
   const u = requireUser();
-  if (u.role !== 'manager') throw new ApiError(403, 'FORBIDDEN', 'Manager statistics only.');
+  if (u.role !== 'manager') throw new ApiError(403, 'FORBIDDEN', 'Responsible Engineer statistics only.');
   return managerStats(s, u);
 });
 route('GET', '/audit', ({ query, s }) => {

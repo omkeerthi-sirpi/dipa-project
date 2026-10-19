@@ -1,6 +1,6 @@
 // Dashboard charts. Status colours are reserved for pass / warning / fail and are
 // always paired with a legend label; categorical series use a fixed, validated order.
-import { Bar, BarChart, CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import type { ManagerStats, TrendPoint } from '@/types';
 
 export const STATUS_COLORS = { passed: '#0ca30c', warnings: '#fab219', failed: '#d03b3b' };
@@ -46,42 +46,6 @@ export function ProjectStatusChart({ data, height = 260 }: { data: ManagerStats[
           <Bar dataKey="approved" name="Approved" stackId="p" fill={SERIES[2]} stroke="#fff" strokeWidth={1} />
           <Bar dataKey="changes" name="Changes requested" stackId="p" fill={SERIES[3]} stroke="#fff" strokeWidth={1} radius={[0, 4, 4, 0]} />
         </BarChart>
-      </ResponsiveContainer>
-    </div>
-  );
-}
-
-export function WorkloadChart({ data, height = 240 }: { data: ManagerStats['workload']; height?: number }) {
-  const rows = data.map((d) => ({ ...d, short: d.name.split(' ')[0] }));
-  return (
-    <div style={{ height }} role="img" aria-label="Engineer workload: active, awaiting approval and approved documents">
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={rows} margin={{ top: 8, right: 8, left: -18, bottom: 0 }} barCategoryGap="24%" barGap={2}>
-          {grid}
-          <XAxis dataKey="short" {...axis} />
-          <YAxis allowDecimals={false} {...axis} />
-          <Tooltip {...tooltipStyle} labelFormatter={(_, p) => (p?.[0]?.payload as { name?: string })?.name ?? ''} />
-          {legend}
-          <Bar dataKey="active" name="Active" fill={SERIES[0]} radius={[4, 4, 0, 0]} />
-          <Bar dataKey="awaiting" name="Awaiting approval" fill={SERIES[1]} radius={[4, 4, 0, 0]} />
-          <Bar dataKey="completed" name="Approved" fill={SERIES[2]} radius={[4, 4, 0, 0]} />
-        </BarChart>
-      </ResponsiveContainer>
-    </div>
-  );
-}
-
-export function TurnaroundChart({ data, height = 200 }: { data: ManagerStats['turnaround']['byWeek']; height?: number }) {
-  return (
-    <div style={{ height }} role="img" aria-label="Average approval turnaround in hours per week">
-      <ResponsiveContainer width="100%" height="100%">
-        <LineChart data={data} margin={{ top: 8, right: 12, left: -18, bottom: 0 }}>
-          {grid}
-          <XAxis dataKey="label" {...axis} />
-          <YAxis allowDecimals={false} unit="h" {...axis} />
-          <Tooltip {...tooltipStyle} cursor={{ stroke: '#94a3b8', strokeWidth: 1 }} formatter={(v) => [v === null || v === undefined ? 'No decisions' : `${v} h`, 'Avg. turnaround']} />
-          <Line type="monotone" dataKey="avgHours" name="Avg. turnaround" stroke={SERIES[0]} strokeWidth={2} dot={{ r: 4, strokeWidth: 2, stroke: '#fff' }} activeDot={{ r: 5 }} />
-        </LineChart>
       </ResponsiveContainer>
     </div>
   );
